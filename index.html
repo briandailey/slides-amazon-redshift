@@ -36,12 +36,13 @@
 
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
-                <section>
+                <section data-background="img/stars.jpg">
                     <h1>Amazon Redshift</h1>
                     <h3>What You Need To Know</h3>
                     <p>
                     <small>
                         CoderFaire 2013<br/>
+                        <a href="http://www.flickr.com/photos/nasamarshall/5095567894/in/photostream/">Photo: NASA</a>
                     </small>
                     </p>
                 </section>
@@ -72,6 +73,17 @@
                     <img width="320" height="299" src="img/haha-business.jpg" alt="Ha ha business!">
                 </section>
                 <section>
+                    <h3>Why we use it</h3>
+                    <ul>
+                        <li>It looks a lot like PostgreSQL</li>
+                        <!-- learning curve is short for us -->
+                        <li>Much cheaper than Hadoop</li>
+                        <!-- see the airbnb write-up -->
+                        <li>Easy ad-hoc aggregate queries</li>
+                        <!-- uses columnar store so sums, averages, etc are quick. -->
+                    </ul>
+                </section>
+                <section>
                     <h3>If this is Postgres:</h3>
                     <img src="img/edward-500.jpg" alt="normal">
                 </section>
@@ -85,40 +97,86 @@
                 </section>
 
                 <section>
-                    <h2>Point of View</h2>
-                    <p>
-                        Press <strong>ESC</strong> to enter the slide overview.
-                    </p>
-                    <p>
-                        Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-                    </p>
+                <h2>Redshift<br/>
+                    Architecture</h2>
                 </section>
 
                 <section>
-                    <h2>Works in Mobile Safari</h2>
-                    <p>
-                        Try it out! You can swipe through the slides and pinch your way to the overview.
-                    </p>
+                    <a href="http://docs.aws.amazon.com/redshift/latest/dg/c_high_level_system_architecture.html"><img src="img/redshift-architecture.png" alt="redshift architecture" /></a>
+                </section>
+
+                <section data-background="img/composer.png">
+                    <h1>Leader Node</h1>
+                    <p><small><a href="http://www.flickr.com/photos/frederikmagle/6880669820/">Photo: Frederik Magle</a></small></p>
+                </section>
+                <section data-background="img/symphony.jpg">
+                    <h1>Compute Nodes</h1>
+                    <p><small><a href="http://www.flickr.com/photos/paulrobinsonuk/8406097564/">Photo: Paul Robinson</a></small></p>
                 </section>
 
                 <section>
-                    <h2>Marvelous Unordered List</h2>
-                    <ul>
-                        <li>No order here</li>
-                        <li>Or here</li>
-                        <li>Or here</li>
-                        <li>Or here</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Fantastic Ordered List</h2>
+                    <h3>Two types of nodes...</h3>
                     <ol>
-                        <li>One is smaller than...</li>
-                        <li>Two is smaller than...</li>
-                        <li>Three!</li>
+                        <li>XL: 2 cores, 15GiB memory, 3 disk drives with 2TB of local attached storage.</li>
+                        <li>8XL: 16 cores, 120GiB memory, 24 disk drives (16TB)</li>
                     </ol>
                 </section>
+
+                <section>
+                <ul>
+                    <li>Each node has multiple slices (one for each core)</li>
+                    <li>Executes queries in parallel over each slice</li>
+                    <li>Data is divvied up to each slice by a distribution key...</li>
+                </ul>
+                </section>
+
+                <section>
+                    <h2>Building Tables</h2>
+                </section>
+
+                <section data-background="img/anarchy.jpg">
+                    <h1>unenforced<br/>constraints</h1>
+                    <p><a href="http://www.flickr.com/photos/80497449@N04/7383943916/">Photo: Nicolas Raymand</a></p>
+                </section>
+                <section data-background="img/anarchy.jpg">
+                    <p><q cite="http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-defining-constraints.html">“Amazon Redshift does not enforce unique, primary-key, and foreign-key constraints.”</q></p>
+                </section>
+                <section>
+                    <h3>unsupported types</h3>
+                    <ul>
+                        <li>Arrays</li>
+                        <li>Date/Time Types</li>
+                        <li>Numeric Types (SERIAL, MONEY)</li>
+                        <li>JSON</li>
+                        <li>XML</li>
+                        <li><a href="http://docs.aws.amazon.com/redshift/latest/dg/c_unsupported-postgresql-datatypes.html">...and more...</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>supported types</h3>
+                    <ul>
+                        <li>SMALLINT</li>
+                        <li>INTEGER</li>
+                        <li>BIGINT</li>
+                        <li>DECIMAL</li>
+                        <li>REAL</li>
+                        <li>DOUBLE PRECISION</li>
+                        <li>BOOLEAN</li>
+                        <li>CHAR</li>
+                        <li>VARCHAR</li>
+                        <li>DATE</li>
+                        <li>TIMESTAMP</li>
+                    </ul>
+                </section>
+                <section>
+                    <img src="img/dragons-small.jpg" alt="Dragons" />
+                </section>
+                <section>
+                <blockquote cite="http://docs.aws.amazon.com/redshift/latest/dg/r_Character_types.html#r_Character_types-char-or-character">
+                    CHAR and VARCHAR data types are defined<br/>
+                    in terms of bytes, not characters.</blockquote>
+                </section>
+
 
                 <section id="transitions">
                     <h2>Transition Styles</h2>
