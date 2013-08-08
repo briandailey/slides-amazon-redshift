@@ -178,11 +178,125 @@
                         in terms of bytes, not characters."</blockquote>
                 </section>
                 <section>
+                    <h3>Distribution Key</h3>
+                    <ul>
+                        <li>Default is round robin / even distribution.</li>
+                        <li>Otherwise, like values are stored together.</li>
+                        <li>Aim is to distribute data evenly across slices.</li>
+                    </ul>
+                </section>
+                <section>
                     <h3>Sort Key</h3>
                     <blockquote cite="http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html">Amazon Redshift stores your data on disk in sorted order according to the sort key.</blockquote>
                 </section>
+                <section data-background="img/jobs.jpg">
+                    <h2>One more thing...</h2>
+                    <ul>
+                        <li>You can't ALTER COLUMN.</li>
+                        <li>Only one ADD COLUMN per ALTER TABLE.</li>
+                    </ul>
+                    <br/>
+                    <br/>
+                    <p><small>Photo credit: <a href="http://www.flickr.com/photos/acaben/541420967/" title="Steve Jobs Keynote by acaben, on Flickr">Ben Stanfield</a></small></p>
+                </section>
+
                 <section>
-                    <h3>Distribution Key</h3>
+                    <h1>Loading Data Into Redshift</h1>
+                </section>
+
+                <section>
+                    <h2>Your Options</h2>
+                    <ul>
+                        <li>S3</li>
+                        <li>DynamoDB</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Best Practice</h3>
+                    <h1>S3</h1>
+                    <h4>(Per Amazon)</h4>
+                </section>
+
+                <section>
+<pre><code style="word-wrap: break-word;">COPY table_name [ (column1 [,column2, ...]) ]
+FROM 's3://objectpath'
+[ WITH ] CREDENTIALS [AS] 'aws_access_credentials'
+[ option [ ... ] ]</code></pre>
+                </section>
+
+                <section>
+                    <ul>
+                        <li><i>objectpath</i> is a prefix. Loads in parallel.</li>
+                        <li>gzip</li>
+                        <li>encryption</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Debugging</h2>
+                    <ul>
+                        <li>STL_LOAD_ERRORS</li>
+                        <li>STL_LOADERROR_DETAIL</li>
+                        <li>STL_S3CLIENT</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Debugging</h2>
+                    <ul>
+                        <li>NOLOAD</li>
+                        <li>MAXERROR</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="img/dragons-small.jpg" alt="Dragons" />
+                    <!-- There be some dragons here. -->
+                </section>
+
+                <section>
+                    <p>You need 2.5x data size to load if sorted or to vacuum table.</p>
+                </section>
+
+                <section>
+                    <p>Date or timestamp columns must be formatted in same way (only defined once).</p>
+                    <p>(ACCEPTANYDATE will load NULL when format does not match.)</p>
+                </section>
+
+                <section>
+                    <p>Ingest via SQL</p>
+                    <p>Sure...</p>
+                </section>
+
+                <section>
+                    <img src="img/wtf-is-wrong-with-you.jpg" alt="WTF is wrong with you?" />
+                </section>
+
+
+                <section>
+                    <h1>QUERYING DATA</h1>
+                </section>
+
+                <section><h3>Looks/smells like Postgres 8.0.2.</h3></section>
+
+                <section>
+                    <ul>
+                        <li>AVG(INT) will return INT.</li>
+                        <li>Note that this is NOT listed in "Features implemented differently."</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>EXTRACTING DATA</h1>
+                </section>
+
+                <section>
+<pre><code style="word-wrap: break-word;">unload ('select * from tablename')
+to 's3://mybucket/'
+credentials 'aws_access_key_id=[your-access-key-id];
+aws_secret_access_key=[your-secret-access-key]';
+</code></pre>
                 </section>
 
                 <section id="transitions">
