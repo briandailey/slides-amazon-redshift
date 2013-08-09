@@ -299,6 +299,56 @@ aws_secret_access_key=[your-secret-access-key]';
 </code></pre>
                 </section>
 
+                <section>
+                    <p>UNLOAD dumps to multiple files</p>
+                    <pre><code>s3://bucket/table_data_0000
+s3://bucket/table_data_0000</code></pre>
+                </section>
+
+                <section>
+                    <p>...unless you trick it.</p>
+                    <pre><code>unload ('select * from (
+select * from ... where ...) limit 2147483647') ...</code></pre>
+                </section>
+
+                <section>
+                    <p>But if you're over 5.8GiB, files will still split.</p>
+                    <p>It's also slower.</p>
+                </section>
+
+                <section>
+                    <h1>Optimization</h1>
+                </section>
+
+                <section>
+                    <h4>Workload Manager (WLM)</h4>
+                    <p>Controls concurrent queries. Less  means more memory per process.</p>
+                    <p>"By default, a cluster is configured with one queue that can run five queries concurrently."</p>
+                    <!-- http://docs.aws.amazon.com/redshift/latest/dg/cm-c-defining-query-queues.html -->
+                </section>
+
+                <section>
+                    <h3>VACUUM (ANALYZE)</h3>
+                    <p>Vacuum early, vacuum often.</p>
+                    <p>Anytime you've made non-trivial changes to data.</p>
+                </section>
+
+                <section>
+                    <p>VACUUM is expensive. Schedule for slow days.</p>
+                </section>
+
+                <section>
+                    <p>DATE or TIMESTAMP > CHAR</p>
+                </section>
+
+                <section>
+                    <h1>Web UI</h1>
+                </section>
+
+                <section>
+
+                </section>
+
                 <section id="transitions">
                     <h2>Transition Styles</h2>
                     <p>
