@@ -63,16 +63,16 @@
                     <h3>toc</h3>
                     <ul>
                         <li>What is Redshift?</li>
-                        <li>Why we use it.</li>
-                        <li>Redshift architecture</li>
-                        <li>Building tables</li>
+                        <li>Why We Use It</li>
+                        <li>Cost Overview</li>
+                        <li>Redshift Architecture</li>
+                        <li>Building Tables</li>
                         <li>Distribution and Sort Keys</li>
                         <li>Loading Data</li>
                         <li>Querying Data</li>
                         <li>Extracting Data</li>
                         <li>Optimization Tips</li>
                         <li>Web UI</li>
-                        <li>Cost Overview</li>
                     </ul>
                 </section>
 
@@ -112,6 +112,91 @@
                     <img src="img/formula_1-300.jpg" alt="F1" style="display: inline; vertical-align: middle;" align="middle">
                 </div>
                 </section>
+
+                <section>
+                    <h3>What's it Cost?</h3>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>XL = 0.85/hr</li>
+                        <li>8XL = 8 x 0.85/hr = $6.80/hr</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Per Terabyte</h3>
+                    <ul>
+                        <li>Unreserved: $3,723 per TB per Year </li>
+                        <li>Reserved 1 year: $2,190 per TB per Year</li>
+                        <li>Reserved 3 years: $999 per TB per year</li>
+                     </ul>
+                </section>
+
+                <section>
+                    <h1>Speed</h1>
+                </section>
+
+                <section>
+                    <h1>PostgreSQL 9.1.9</h1>
+                    <pre><code># select count(*) from dummy_table;
++----------+
+|  count   |
++----------+
+| 21454134 |
++----------+
+(1 row)
+Time: 586931.216 ms
+</code></pre>
+                    ~10 minutes
+                </section>
+
+                <section>
+                    <h1>Redshift</h1>
+                    <pre><code># select count(*) from dummy_table;
+  count
+----------
+ 21454134
+(1 row)
+Time: 1561.359 ms
+</code></pre>
+                    1.5 seconds
+                </section>
+
+                <section>
+                    <h1>PostgreSQL 9.1.1</h1>
+<!-- waiting-->
+
+                    <pre><code># select count(*), year, avg(total_charges) \
+    from dummy_table group by year order by year desc;
++---------+------+---------+
+|  count  | year |   avg   |
++---------+------+---------+
+| 4926225 | 2012 | 6144.37 |
+| 8280484 | 2011 | 6149.85 |
+| 8247425 | 2010 | 5673.83 |
++---------+------+---------+
+(3 rows)
+Time: 850491.316 ms
+</code></pre>
+                    ~15 minutes
+                </section>
+
+                <section>
+                    <h1>Redshift</h1>
+                    <pre><code># select count(*), year, avg(total_charges) \
+    from dummy_table group by year order by year desc;
+  count  | year |   avg
+---------+------+---------
+ 4926225 | 2012 | 6144.37
+ 8280484 | 2011 | 6149.85
+ 8247425 | 2010 | 5673.83
+(3 rows)
+Time: 5887.693 ms
+</code></pre>
+                    5.8 seconds
+                </section>
+
 
                 <section>
                 <h2>Redshift<br/>
@@ -368,25 +453,9 @@ select * from ... where ...) limit 2147483647') ...</code></pre>
 
                 <section><h1>Wrapping up</h1></section>
 
-                <section>
-                    <h3>What's it Cost?</h3>
-                </section>
-
-                <section>
-                    <ul>
-                        <li>XL = 0.85/hr</li>
-                        <li>8XL = 8 x 0.85/hr = $6.80/hr</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Per Terabyte</h3>
-                    <ul>
-                        <li>Unreserved: $3,723 per TB per Year </li>
-                        <li>Reserved 1 year: $2,190 per TB per Year</li>
-                        <li>Reserved 3 years: $999 per TB per year</li>
-                     </ul>
-                </section>
+                <section><h2>Redshift is cost-effective.</h2></section>
+                <section><h2>...fast.</h2></section>
+                <section><h2>...familiar.</h2></section>
 
                 <section>
                     <h1>Redshift</h1>
