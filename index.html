@@ -59,6 +59,23 @@
                     </p>
                 </section>
 
+                <section>
+                    <h3>toc</h3>
+                    <ul>
+                        <li>What is Redshift?</li>
+                        <li>Why we use it.</li>
+                        <li>Redshift architecture</li>
+                        <li>Building tables</li>
+                        <li>Distribution and Sort Keys</li>
+                        <li>Loading Data</li>
+                        <li>Querying Data</li>
+                        <li>Extracting Data</li>
+                        <li>Optimization Tips</li>
+                        <li>Web UI</li>
+                        <li>Cost Overview</li>
+                    </ul>
+                </section>
+
                 <!-- Example of nested vertical slides -->
                 <section>
                     <h2>What's Redshift?</h2>
@@ -145,10 +162,11 @@
                     <h3>unsupported types</h3>
                     <ul>
                         <li>Arrays</li>
-                        <li>Date/Time Types</li>
-                        <li>Numeric Types (SERIAL, MONEY)</li>
+                        <li>INTERVAL, TIME, TIMESTAMP WITH TIMEZONE</li>
+                        <li>SERIAL, MONEY</li>
                         <li>JSON</li>
                         <li>XML</li>
+                        <li>UUID</li>
                         <li><a href="http://docs.aws.amazon.com/redshift/latest/dg/c_unsupported-postgresql-datatypes.html">...and more...</a></li>
                     </ul>
                 </section>
@@ -341,9 +359,14 @@ select * from ... where ...) limit 2147483647') ...</code></pre>
                     <p>DATE or TIMESTAMP > CHAR</p>
                 </section>
 
-                <section>
-                <h1>Wrapping up</h1>
-                </section>
+                <section><h2>Web UI</h2></section>
+                <section><img src="img/redshift_performance_console.png" alt="Performance console" /></section>
+                <section><img src="img/redshift_queries.png" alt="Queries" /></section>
+                <section><img src="img/redshift_query_detail.png" alt="Query Detail" /></section>
+                <section><img src="img/redshift_copies.png" alt="Copying" /></section>
+                <section><img src="img/redshift_copy_detail.png" alt="Copy detail" /></section>
+
+                <section><h1>Wrapping up</h1></section>
 
                 <section>
                     <h3>What's it Cost?</h3>
