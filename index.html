@@ -65,7 +65,13 @@
                         <li>What is Redshift?</li>
                         <li>Why We Use It</li>
                         <li>Cost Overview</li>
+                        <li>Rough Benchmarks</li>
                         <li>Redshift Architecture</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <ul>
                         <li>Building Tables</li>
                         <li>Distribution and Sort Keys</li>
                         <li>Loading Data</li>
@@ -90,11 +96,14 @@
                     <img width="320" height="299" src="img/haha-business.jpg" alt="Ha ha business!">
                 </section>
                 <section>
+                    <p>"It achieves its high performance through extreme parallelism, columnar data storage, and smart data compression." - <a href="http://nerds.airbnb.com/redshift-performance-cost">AirBnB</a></p>
+                </section>
+                <section>
                     <h3>Why we use it</h3>
                     <ul>
                         <li>It looks a lot like PostgreSQL</li>
                         <!-- learning curve is short for us -->
-                        <li>Much cheaper than Hadoop</li>
+                        <li>Much cheaper than analytic appliances (Vertica et al)</li>
                         <!-- see the airbnb write-up -->
                         <li>Easy ad-hoc aggregate queries</li>
                         <!-- uses columnar store so sums, averages, etc are quick. -->
@@ -196,6 +205,15 @@ Time: 5887.693 ms
 </code></pre>
                     5.8 seconds
                 </section>
+
+                <section>
+                    <p>AirBnB tested against Hadoop...</p>
+                </section>
+
+                <section>
+                    <p>"Simple range query against a giant table with 3 billion rows, we saw 5x performance improvement over Hive!"</p>
+                </section>
+
 
                 <section>
                     <h1>What It's Good For</h1>
@@ -453,7 +471,34 @@ select * from ... where ...) limit 2147483647') ...</code></pre>
                 </section>
 
                 <section>
+                    <p>Only one VACUUM at a time per cluster.</p>
+                </section>
+
+                <section>
+                    <p>VACUUM doesn't resort unaffected slices.</p>
+                </section>
+
+                <section>
+                    <p>Debugging VACUUM</p>
+                    <ul>
+                        <li>svv_vacuum_progress</li>
+                        <li>svv_vacuum_summary</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Size your columns appropriately.</p>
+                </section>
+
+                <section>
                     <p>DATE or TIMESTAMP > CHAR</p>
+                </section>
+
+                <section><p>Test different configurations!</p>
+                    <ul>
+                        <li>2 8XL nodes?</li>
+                        <li>Or 16 XL nodes?</li>
+                    </ul>
                 </section>
 
                 <section><h2>Web UI</h2></section>
@@ -472,6 +517,14 @@ select * from ... where ...) limit 2147483647') ...</code></pre>
                 <section>
                     <h1>Redshift</h1>
                     <h3>Nice balance!</h3>
+                </section>
+
+                <section>
+                <p>"In fact, our analysts like Redshift so much that they don’t want to go back to Hive and other tools even though a few key features are lacking in Redshift. Also, we have noticed that big joins of billions of rows tend to run for a very long time, so for that we’d go back to hadoop for help." -- <a href="http://nerds.airbnb.com/redshift-performance-cost">AirBnB</a></p>
+                </section>
+
+                <section>
+                <p>"Oddly enough, Redshift isn’t going to sell because devs think it’s super-duper-whizz-bang. It’s going to sell because it took a problem and an industry famous for it’s opaque pricing, high TCO, and unreliable results and completely turned it on its head." -- <a href="http://blog.aggregateknowledge.com/2013/05/16/aws-redshift-how-amazon-changed-the-game/">AK Tech Block</a></p>
                 </section>
 
                 <section>
