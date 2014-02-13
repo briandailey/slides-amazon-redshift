@@ -57,7 +57,7 @@
                     </p><p>
                         <a href="http://twitter.com/byeliad">@byeliad</a>
                     </p>
-                    <aside class="notes">A little about me, get this out of the way quickly.</aside>
+                    <aside class="notes">A little about me, get this out of the way quickly. Stratasan does market research, takes in data and gives a very "bird's-eye" view.</aside>
                 </section>
 
                 <section>
@@ -87,18 +87,26 @@
                 <!-- Example of nested vertical slides -->
                 <section>
                     <h2>What's Redshift?</h2>
+                    <aside class="notes">I'm going to assume you have <em>some</em> idea of what RDBMSs are and how they work.</aside>
                 </section>
                 <section>
                     <h3>bizspeak:</h3>
                     <p><q cite="https://aws.amazon.com/redshift/">
                         Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service ...
                     </q></p>
+                    <aside class="notes">This is the description precisely from Amazon. But it's not really written for you and me.</aside>
                 </section>
                 <section>
                     <img width="320" height="299" src="img/haha-business.jpg" alt="Ha ha business!">
+                    <aside class="notes">Because, business!</aside>
                 </section>
                 <section>
                     <p>"It achieves its high performance through extreme parallelism, columnar data storage, and smart data compression." - <a href="http://nerds.airbnb.com/redshift-performance-cost">AirBnB</a></p>
+                    <aside class="notes">This gets down to the brass tacks.
+                     Before Amazon released Redshift, a company called ParAccel had built a managed database
+                     platform that was designed for analytics, touted to run on commodity hardware.
+                     Who has a lot of commodity hardware? Amazon made a significant investment in the company,
+                     and used their platform to create Redshift.</aside>
                 </section>
                 <section>
                     <h3>Why we use it</h3>
@@ -114,8 +122,9 @@
                     </aside>
                 </section>
                 <section>
-                    <h3>If this is Postgres:</h3>
+                    <h3>If this is PostgreSQL:</h3>
                     <img src="img/edward-500.jpg" alt="normal">
+                    <aside class="notes">If PostgreSQL is Robert Pattison, then Redshift...</aside>
                 </section>
                 <section>
                     <h3>This is Redshift:</h3>
@@ -123,101 +132,103 @@
                     <img src="img/edward-wax.png" alt="wax" style="display: inline; vertical-align: middle;" align="middle">
                     +
                     <img src="img/formula_1-300.jpg" alt="F1" style="display: inline; vertical-align: middle;" align="middle">
+                    <aside class="notes">Is a wax, not-quite-real uncanny valley copy of Robert fused with an F1 racer.
+                        It looks and smells like PostgreSQL 8.0.2 but there are quite a few subtle differences once you scratch the surface.
+                    </aside>
                 </div>
                 </section>
 
                 <section>
                     <h3>What's it Cost?</h3>
+                    <aside class="notes">
+                        I mentioned it was cheaper than Vertica, but here are ballpark numbers.
+                    </aside>
                 </section>
 
                 <section style="font-size: 80%;">
                     <table><colgroup><col style="width: 16%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"></colgroup><caption>US East (N. Virginia)</caption><thead><tr><th></th><th class="rate">vCPU</th><th class="rate">ECU</th><th class="rate">Memory (GiB)</th><th class="rate">Storage</th><th class="rate">I/O</th><th class="rate">Price</th></tr></thead><tbody class="body"><tr class="heading"><th colspan="7" class="type">DW1 - Dense Storage</th></tr><tr class="tiers"><td class="size">dw1.xlarge</td><td class="vCPU">2</td><td class="ECU">4.4</td><td class="memory">15</td><td class="storage">2TB HDD</td><td class="io">0.30GB/s</td><td class="rate yrTerm1Hourly">$0.850 per Hour</td></tr><tr class="tiers"><td class="size">dw1.8xlarge</td><td class="vCPU">16</td><td class="ECU">35</td><td class="memory">120</td><td class="storage">16TB HDD</td><td class="io">2.40GB/s</td><td class="rate yrTerm1Hourly">$6.800 per Hour</td></tr></tbody><tbody class="body"><tr class="heading"><th colspan="7" class="type">DW2 - Dense Compute</th></tr><tr class="tiers"><td class="size">dw2.large</td><td class="vCPU">2</td><td class="ECU">7</td><td class="memory">15</td><td class="storage">0.16TB SSD</td><td class="io">0.20GB/s</td><td class="rate yrTerm1Hourly">$0.250 per Hour</td></tr><tr class="tiers"><td class="size">dw2.8xlarge</td><td class="vCPU">32</td><td class="ECU">104</td><td class="memory">244</td><td class="storage">2.56TB SSD</td><td class="io">3.70GB/s</td><td class="rate yrTerm1Hourly">$4.800 per Hour</td></tr></tbody></table>
+                    <aside class="notes">
+                        There are some differences in cost based on whether you are
+                        doing dense storage, or dense compute. SSD (DW2) is compute.
+                        Higher cost per TB, but lower cost per node.
+                    </aside>
                 </section>
 
                 <section style="font-size: 80%;">
                     <h3>Per Terabyte</h3>
                     <table width="100%"><caption>US East (N. Virginia)</caption><thead><tr><th></th><th colspan="3" class="yrTerm">Effective Price per TB per Year</th></tr><tr><th></th><th class="type">On-Demand</th><th class="type">1yr RI</th><th class="type">3yr RI</th></tr></thead><tbody class="body"><tr class="tiers"><td class="tier">dw1.xlarge</td><td class="price OD">$3,723 </td><td class="price 1yRI">$2,192 </td><td class="price 3yRI">$999 </td></tr><tr class="tiers"><td class="tier">dw1.8xlarge</td><td class="price OD">$3,723 </td><td class="price 1yRI">$2,192 </td><td class="price 3yRI">$999 </td></tr><tr class="tiers"><td class="tier">dw2.large</td><td class="price OD">$13,688 </td><td class="price 1yRI">$8,794 </td><td class="price 3yRI">$5,498 </td></tr><tr class="tiers"><td class="tier">dw2.8xlarge</td><td class="price OD">$16,425 </td><td class="price 1yRI">$11,018 </td><td class="price 3yRI">$5,498 </td></tr></tbody></table>
+                    <aside class="notes">
+                        Here you can see the per terabyte cost a little more
+                        clearly. Obviously, the SSD setup (which I'll talk more
+                        about shortly) is higher per TB.
+                    </aside>
                 </section>
 
                 <section>
                     <h1>Speed</h1>
+                    <aside class="notes">
+                        The $64k question. How fast is it? Now in previous
+                        versions of this talk I've ran my own stats, but I
+                        don't do a great job of that so I'm going to leave it
+                        to some fellows at Berkley.
+                    </aside>
                 </section>
 
                 <section>
-                    <h1>PostgreSQL 9.1.9</h1>
-                    <pre><code># select count(*) from dummy_table;
-+----------+
-|  count   |
-+----------+
-| 21454134 |
-+----------+
-(1 row)
-Time: 586931.216 ms
-</code></pre>
-                    ~10 minutes
+                    <h3>Scan Query</h3>
+                    <img src="img/scan_query_speed.png" alt="Scan Query Speed" />
+                    <aside class="notes">
+                        Redshift is the blue bar on the far left.
+                        A is a small result set.
+                        B is intermediate.
+                        C is ETL-like (spread across several nodes).
+                    </aside>
                 </section>
 
                 <section>
-                    <h1>Redshift</h1>
-                    <pre><code># select count(*) from dummy_table;
-  count
-----------
- 21454134
-(1 row)
-Time: 1561.359 ms
-</code></pre>
-                    1.5 seconds
+                    <h3>Aggregate Query</h3>
+                    <img src="img/aggregate_query_speed.png" alt="Aggregate Query Speed" />
+                    <aside class="notes">
+                        "Redshift's columnar storage provides greater benefit than in [scan query] since several columns of the UserVistits table are un-used."
+                    </aside>
                 </section>
 
                 <section>
-                    <h1>PostgreSQL 9.1.1</h1>
-<!-- waiting-->
-
-                    <pre><code># select count(*), year, avg(total_charges) \
-    from dummy_table group by year order by year desc;
-+---------+------+---------+
-|  count  | year |   avg   |
-+---------+------+---------+
-| 4926225 | 2012 | 6144.37 |
-| 8280484 | 2011 | 6149.85 |
-| 8247425 | 2010 | 5673.83 |
-+---------+------+---------+
-(3 rows)
-Time: 850491.316 ms
-</code></pre>
-                    ~15 minutes
+                    <h3>Join Query</h3>
+                    <img src="img/join_query_speed.png" alt="Join Query Speed" />
+                    <aside class="notes">
+                        "Redshift has an edge in this case because the overall network capacity in the cluster is higher."
+                    </aside>
                 </section>
 
                 <section>
-                    <h1>Redshift</h1>
-                    <pre><code># select count(*), year, avg(total_charges) \
-    from dummy_table group by year order by year desc;
-  count  | year |   avg
----------+------+---------
- 4926225 | 2012 | 6144.37
- 8280484 | 2011 | 6149.85
- 8247425 | 2010 | 5673.83
-(3 rows)
-Time: 5887.693 ms
-</code></pre>
-                    5.8 seconds
+                    <blockquote>"Hive, Impala, and Shark are used is because they offer a high degree of flexibility, both in terms of the underlying format of the data and the type of computation employed."</blockquote>
+                    <p><a href="https://amplab.cs.berkeley.edu/benchmark/">Full Study: https://amplab.cs.berkeley.edu/benchmark/</a></p>
+                    <aside class="notes">
+                        The authors point out that Hive et al are more flexible. Also, they are open source. You can
+                        run them on your own hardware. Can't do that with Redshift (yet).
+                    </aside>
                 </section>
 
                 <section>
                     <p>AirBnB tested against Hadoop...</p>
+                    <aside class="notes">
+                        AirBnB did some early testing and published their findings.
+                    </aside>
                 </section>
 
                 <section>
-                    <p>"Simple range query against a giant table with 3 billion rows, we saw 5x performance improvement over Hive!"</p>
+                    <blockquote>"Simple range query against a giant table with 3 billion rows, we saw 5x performance improvement over Hive!"</blockquote>
+                    <aside class="notes">Emphasis not added by me.</aside>
                 </section>
 
 
                 <section>
                     <h1>What It's Good For</h1>
                 </section>
-                <section><h3>Analytics</h3></section>
+                <section><h3>Analytics</h3><aside class="notes">Particularly aggregate queries. Because it's columnar, sums, avgs, etc are particularly fast.</aside></section>
                 <section><h1>... And not good for</h1></section>
-                <section><h3>Your web application</h3></section>
+                <section><h3>Your web application</h3><aside class="notes">If you're doing a lot of SELECT FROM WHERE ID = then you are gonna have a bad time. It doesn't use indices, so single lookups are dog slow.</aside></section>
 
                 <section>
                 <h1>Redshift<br/>
@@ -226,15 +237,25 @@ Time: 5887.693 ms
 
                 <section>
                     <a href="http://docs.aws.amazon.com/redshift/latest/dg/c_high_level_system_architecture.html"><img src="img/redshift-architecture.png" alt="redshift architecture" /></a>
+                    <aside class="notes">The Redshift cluster in it's natural environment consists of a leader node and multiple compute nodes.
+                        Each node in the cluster has its own operating system, dedicated memory, and dedicated disk storage.</aside>
                 </section>
 
                 <section data-background="img/composer.png">
                     <h1>Leader Node</h1>
                     <p><small><a href="http://www.flickr.com/photos/frederikmagle/6880669820/">Photo: Frederik Magle</a></small></p>
+                    <aside class="notes">
+                        The leader node manages the distribution of data and query processing tasks to the compute nodes.
+                        Only created if there are 2 or more nodes. This is what you're talking to and interacting with
+                        via SQL. It plans the queries, distributes it to the compute nodes, and aggregates the results.
+                        It is where all of the pg_ (catalog) tables are found.
+                        If SQL doesn't hit data (e.g., SELECT NOW()) it's run only on the leader node.
+                    </aside>
                 </section>
                 <section data-background="img/symphony.jpg">
                     <h1>Compute Nodes</h1>
                     <p><small><a href="http://www.flickr.com/photos/paulrobinsonuk/8406097564/">Photo: Paul Robinson</a></small></p>
+                    <aside class="notes">Does the processing and hands it back to the leader node. Grunts of the Redshift world.</aside>
                 </section>
 
                 <section>
@@ -245,6 +266,12 @@ Time: 5887.693 ms
                         <li><b>(New)</b> SSD XL:  - 160 GB of SSD storage, 2 Intel Xeon E5-2670v2 virtual cores, and 15 GiB of RAM.</li>
                         <li><b>(New)</b> SSD 8XL:  - 2.56 TB of SSD storage, 32 Intel Xeon E5-2670v2 virtual cores, and 244 GiB of RAM.</li>
                     </ol>
+                    <aside class="notes">
+                        This goes back to the dense storage vs. dense compute.
+                        The SSD options were introduced last month. They look awesome.
+                        I've not had a chance to try them yet, but early reports
+                        say they are blazing fast (of course).
+                    </aside>
                 </section>
 
                 <section>
@@ -253,10 +280,21 @@ Time: 5887.693 ms
                     <li>Executes queries in parallel over each slice</li>
                     <li>Data is divvied up to each slice by a distribution key...</li>
                 </ul>
+                    <aside class="notes">
+                        The data on a compute node is distributed across slices.
+                        Slices correspond to the nodes processors, the idea is
+                        that they can be scanned in parallel.
+                        Data is managed so that it is spread evenly across all
+                        slices. You can customize this a bit to optimize table
+                        scans and joins. We'll cover that shortly.
+                    </aside>
                 </section>
 
                 <section>
                     <h2>Building Tables</h2>
+                    <aside class="notes">
+                        Before you do anything on Redshift you'll need to build your
+                        tables! What options are different than PostgreSQL?</aside>
                 </section>
 
                 <section data-background="img/anarchy.jpg">
@@ -265,6 +303,12 @@ Time: 5887.693 ms
                 </section>
                 <section data-background="img/anarchy.jpg">
                     <p><q cite="http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-defining-constraints.html">“Amazon Redshift does not enforce unique, primary-key, and foreign-key constraints.”</q></p>
+                    <aside class="notes">
+                        Anarchy is unleashed! Foreign keys and primary keys
+                        must be enforced by your application. That said, you can
+                        still tell Redshift where they are used and it will
+                        use them to plan and optimize queries.
+                    </aside>
                 </section>
                 <section>
                     <h3>unsupported types</h3>
@@ -276,6 +320,13 @@ Time: 5887.693 ms
                         <li>UUID</li>
                         <li><a href="http://docs.aws.amazon.com/redshift/latest/dg/c_unsupported-postgresql-datatypes.html">...and more...</a></li>
                     </ul>
+                    <aside class="notess">
+                        Secondly, if you’re migrating from an existing database,
+                        you’ll notice that there are a lot of unsupported
+                        PostgreSQL data types. The ones that hurt the most for
+                        us was SERIAL, since we used that for primary key
+                        columns.
+                    </aside>
                 </section>
                 <section>
                     <h3>supported types</h3>
@@ -293,27 +344,94 @@ Time: 5887.693 ms
                         <li>TIMESTAMP</li>
                         <li><b>(New)</b> JSON</li>
                     </ul>
+                    <aside class="notes">
+                        It's almost easier to enumerate over
+                        what they DO support. Note that JSON support was added
+                        in September 2013. It stores it inside VARCHAR, much
+                        like PostgreSQL does.
+                    </aside>
                 </section>
                 <section>
                     <img src="img/dragons-small.jpg" alt="Dragons" />
-                    <!-- There be some dragons here. -->
+                    <aside class="notes">
+                        Here are some dragons that bit us.
+                    </aside>
                 </section>
                 <section>
                     <blockquote cite="http://docs.aws.amazon.com/redshift/latest/dg/r_Character_types.html#r_Character_types-char-or-character">
                         "CHAR and VARCHAR data types are defined<br/>
                         in terms of bytes, not characters."</blockquote>
+                    <aside class="notes">
+                        When you issue a CREATE statement note that length
+                        on these types is in bytes, not characters. If you do
+                        anything with multibyte data, this will silently
+                        truncate your strings. Terrible to debug.
+                        UTF8 up to 4 bytes is supported.
+                    </aside>
                 </section>
+
+                <section>
+                    <h1>Distributing Data</h1>
+                </section>
+
                 <section>
                     <h3>Distribution Key</h3>
                     <ul>
                         <li>Default is round robin / even distribution.</li>
-                        <li>Otherwise, like values are stored together.</li>
+                        <li>Like values can be (approximately) stored together
+                        on node slices.</li>
+                        <li>ALL distribution copies the table to each node.</li>
                         <li>Aim is to distribute data evenly across slices.</li>
                     </ul>
+                    <aside class="notes">
+                        EVEN is the default. Follows a round-robin distribution.
+                        Use this if table is denormalized, doesn't
+                        participate in joins, or doesn't have a clear choice on
+                        dist key.
+                        KEY give you one column and attempts to group like
+                        values together on slices. If you join on a column
+                        frequently, use this.
+                        "ALL distribution is appropriate only for relatively slow
+                        moving tables; that is, tables that are not updated
+                        frequently or extensively. Small dimension tables do not
+                        benefit significantly from ALL distribution, because the
+                        cost of redistribution is low."
+                    </aside>
+                </section>
+                <section>
+                    <p>In general, if you use KEY you still want to aim for even
+                    distribution!</p>
+                    <aside class="notes">
+                        An example of this would be a table with an
+                        "favorite_color" column. If the values are pretty
+                        evently distributed, then grouping them together means
+                        Redshift has to do less work in copying data around
+                        inside the cluster to perform the aggregate. On the
+                        other hand, if 90% of your table data has a
+                        favorite_color of "red", then the node or slice with the
+                        "red" data is going to have to do a disproportionate
+                        amount of work.
+                    </aside>
                 </section>
                 <section>
                     <h3>Sort Key</h3>
                     <blockquote cite="http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html">Amazon Redshift stores your data on disk in sorted order according to the sort key.</blockquote>
+                </section>
+                <section>
+                    <blockquote>“Amazon Redshift stores columnar data in 1 MB
+                    disk blocks. The min and max values for each block are
+                    stored as part of the metadata.”</blockquote>
+                    <aside class="notes">
+                        This means that if you have a sort key indicated, Redshift
+                        can skip over swaths of your data to pinpoint exactly where the
+                        value you’re looking for can be found.
+                        Amazon’s webinars often use the example of a “last
+                        updated timestamp” column to demonstrate how this works.
+                        If you are most commonly accessing data based on that
+                        timestamp you can use it as a sort key. When searching
+                        for values, it will only look at nodes, slices, and
+                        blocks that are relevant.
+                    </aside>
                 </section>
                 <section data-background="img/jobs.jpg">
                     <h2>One more thing...</h2>
@@ -324,30 +442,57 @@ Time: 5887.693 ms
                     <br/>
                     <br/>
                     <p><small>Photo credit: <a href="http://www.flickr.com/photos/acaben/541420967/" title="Steve Jobs Keynote by acaben, on Flickr">Ben Stanfield</a></small></p>
+                    <aside class="notes">
+                        If you have to modify a column, you'll have to add one,
+                        copy the data over, and rename it.
+                        If you need to add multiple columns it may be easier to
+                        just create the new table and copy everything over into
+                        it.
+                    </aside>
                 </section>
 
                 <section>
                     <h1>Loading Data Into Redshift</h1>
+                    <aside class="notes">
+                        Now that you've created your table structure,
+                        let's talk about how to get data into it.</aside>
                 </section>
 
                 <section>
                     <h2>Your Options</h2>
                     <ul>
                         <li>S3</li>
+                        <li><b>(New)</b> Remote Host (via SSH)</li>
                         <li>DynamoDB</li>
                     </ul>
+                    <aside class="notes">
+                        The remote host option was added in November 2013.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>Best Practice</h3>
                     <h1>S3</h1>
                     <h4>(Per Amazon)</h4>
+                    <aside class="notes">
+                        I'm going to spend the most time detailing how to get
+                        your data uploaded via S3, since that's what Amazon
+                        recommends as a best practice. It's also the most
+                        straightforward way to get data into Redshift.
+                    </aside>
                 </section>
 
                 <section>
                     <h3>s3cmd is your friend.</h3>
                     <p><a href="http://s3tools.org/s3cmd">http://s3tools.org/s3cmd</a></p>
-                    <pre><code>s3cmd put gigantic_csv_file.csv.part_00*gz s3://mybucket/mypath/</code></pre>
+                    <pre><code>s3cmd put gigantic_csv_file.csv.part.gz.00000 s3://mybucket/mypath/</code></pre>
+                    <aside class="notes">
+                        You can also use boto, which would allow you to stream
+                        the upload of multiple files in parallel. s3cmd doesn't
+                        yet do that.
+                        You can gzip your files before uploading to save
+                        bandwidth. You can also separate your file into chunks
+                        and Redshift will load them in parallel.
                 </section>
 
                 <section>
@@ -355,6 +500,13 @@ Time: 5887.693 ms
 FROM 's3://objectpath'
 [ WITH ] CREDENTIALS [AS] 'aws_access_credentials'
 [ option [ ... ] ]</code></pre>
+                    <aside class="notes">
+                        Here is the basic COPY syntax. You give the bucket and
+                        path to the file, and your AWS credentials so Redshift
+                        can load it. Note that you really want to do any data
+                        transformations before you load it into Redshift in
+                        bulk.
+                    </aside>
                 </section>
 
                 <section>
@@ -363,6 +515,12 @@ FROM 's3://objectpath'
                         <li>gzip</li>
                         <li>encryption</li>
                     </ul>
+                    <aside class="notes">
+                        Again, note that the object path is a prefix. If you
+                        have chunked files, you can load in parallel. COPY has
+                        several other options, too. You can load it gzipped, or
+                        load an encrypted file.
+                    </aside>
                 </section>
 
                 <section>
@@ -372,6 +530,14 @@ FROM 's3://objectpath'
                         <li>STL_LOADERROR_DETAIL</li>
                         <li>STL_S3CLIENT</li>
                     </ul>
+                    <aside class="notes">yo
+                        So how do you track down issues when a COPY goes wrong?
+                        These tables are your log file equivalents. They will
+                        tell you what went wrong.
+                        STL_LOAD_ERRORS gives overview, DETAIL gives row
+                        specific information, and S3CLIENT tells you about any
+                        errors connecting to S3.
+                    </aside>
                 </section>
 
                 <section>
@@ -380,11 +546,21 @@ FROM 's3://objectpath'
                         <li>NOLOAD</li>
                         <li>MAXERROR</li>
                     </ul>
+                    <aside class="notes">
+                        It's a good idea to do a dry run with NOLOAD as you can
+                        snuff out any issues quickly. By default, REdshift will
+                        stop loading after the first error, so you can set
+                        MAXERROR to 0 to see all errors. Just don't forget to
+                        reset that when you are finished testing!
+                    </aside>
                 </section>
 
                 <section>
                     <img src="img/dragons-small.jpg" alt="Dragons" />
-                    <!-- There be some dragons here. -->
+                    <aside class="notes">
+                        Here are some more gotchas we ran into when loading data
+                        into Redshift.
+                    </aside>
                 </section>
 
                 <section>
@@ -394,11 +570,20 @@ FROM 's3://objectpath'
                 <section>
                     <p>Date or timestamp columns must be formatted in same way (only defined once).</p>
                     <p>(ACCEPTANYDATE will load NULL when format does not match.)</p>
+                    <aside class="notes">
+                        ACCEPTANYDATE will effectively set errors to null,
+                        rather than puking and stopping the load. If you have
+                        varying time formats that you want to load into a
+                        datestamp, you will need to do some transformation prior
+                        to loading.
+                    </aside>
                 </section>
 
                 <section>
                     <p>Ingest via SQL</p>
                     <p>Sure...</p>
+                    <aside class="notes">
+                        You <em>could</em>, but it's going to be slow.</aside>
                 </section>
 
                 <section>
@@ -408,19 +593,35 @@ FROM 's3://objectpath'
 
                 <section>
                     <h1>QUERYING DATA</h1>
+                    <aside class="notes">
+                        So we've defined our structure and we've loaded some
+                        data. What's next? Queries!
+                    </aside>
                 </section>
 
-                <section><h3>Looks/smells like Postgres 8.0.2.</h3></section>
+                <section><h3>Looks/smells like Postgres 8.0.2.</h3>
+                    <aside class="notes">
+                       We're not going to spend a lot of time here because, by
+                       golly, if you've used Postgres much you should be in
+                       familiar territory.</aside>
+                </section>
 
                 <section>
                     <ul>
                         <li>AVG(INT) will return INT.</li>
                         <li>Note that this is NOT listed in "Features implemented differently."</li>
                     </ul>
+                    <aside class="notes">
+                        However, this is one thing I ran into.
+                        Postgres 8 will return a decimal, but Redshift returns
+                        an int truncated.
+                    </aside>
                 </section>
 
                 <section>
                     <h1>EXTRACTING DATA</h1>
+                    <aside class="notes">
+                        How do we get our data out of Redshift?</aside>
                 </section>
 
                 <section>
@@ -429,34 +630,72 @@ to 's3://mybucket/'
 credentials 'aws_access_key_id=[your-access-key-id];
 aws_secret_access_key=[your-secret-access-key]';
 </code></pre>
+                    <aside class="notes">
+                        It's pretty easy. Same as COPY, but in reverse. Push the
+                        data back to Amazon S3 for backups or to copy down
+                        locally. UNLOAD has many options, you can compress or
+                        encrypt the data, or specify format.</aside>
                 </section>
 
                 <section>
                     <p>UNLOAD dumps to multiple files</p>
                     <pre><code>s3://bucket/table_data_0000
 s3://bucket/table_data_0000</code></pre>
+                    <aside class="notes">
+                        One little gotcha is that UNLOAD creates a file for each
+                        slice. So multiple notes are going to mean multiple
+                        files. This is true even if it's a relatively small
+                        query (e.g., "SELECT COUNT()").
+                    </aside>
                 </section>
 
                 <section>
                     <p>...unless you trick it.</p>
                     <pre><code>unload ('select * from (
 select * from ... where ...) limit 2147483647') ...</code></pre>
+                    <aside class="notes">
+                        There is one way around this, but it's not terribly
+                        elegant. That LIMIT is the max unsigned integer.
+                        If it's over that, you are SOL.
+                    </aside>
                 </section>
 
                 <section>
                     <p>But if you're over 5.8GiB, files will still split.</p>
                     <p>It's also slower.</p>
+                    <aside class="notes">
+                        Because it has to aggregate all of that and it can't do
+                        the UNLOAD in parallel, it'll be slower. It also runs
+                        into the S3 file size limit, which will cause the file
+                        to break into parts.
+                    </aside>
                 </section>
 
                 <section>
                     <h1>Optimization</h1>
+                    <aside class="notes">
+                        Redshift, like any database platform, can be optimized.
+                        Here are a few tricks that you should know
+                        about.</aside>
                 </section>
 
                 <section>
                     <h4>Workload Manager (WLM)</h4>
-                    <p>Controls concurrent queries. Less  means more memory per process.</p>
+                    <p>Controls concurrent queries. Less means more memory per process.</p>
                     <p>"By default, a cluster is configured with one queue that can run five queries concurrently."</p>
                     <!-- http://docs.aws.amazon.com/redshift/latest/dg/cm-c-defining-query-queues.html -->
+                    <aside class="notes">
+                        The WLM is kind of a multi-lane queuing mechanism for queries. You
+                        can segment long running queries into one lane, and
+                        shorter ones into another higher-priority lane.
+
+                        You can create up to 8 queues, and you can allow up to 15
+                        concurrent queries. One strategy is to set the
+                        concurrent queries to 1 when you are running a COPY
+                        statement. That speeds up the load at the cost of making
+                        other queries wait. You can also assign queries at
+                        runtime, or set them up by user.
+                    </aside>
                 </section>
 
                 <section>
@@ -495,8 +734,9 @@ select * from ... where ...) limit 2147483647') ...</code></pre>
 
                 <section><p>Test different configurations!</p>
                     <ul>
-                        <li>2 8XL nodes?</li>
-                        <li>Or 16 XL nodes?</li>
+                        <li>2 DW1 8XL nodes?</li>
+                        <li>16 DW1 XL nodes?</li>
+                        <li>5 DW2 XL nodes?</li>
                     </ul>
                 </section>
 
