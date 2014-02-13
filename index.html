@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>Amazon Redshift: What You Need To Know (CoderFaire 2013)</title>
+        <title>Amazon Redshift: What You Need To Know (PyTennessee 2014)</title>
 
         <meta name="description" content="Amazon Redshift: The basics, what you need to know to get started, and some caveats.">
         <meta name="author" content="Brian Dailey">
@@ -41,7 +41,7 @@
                     <h3>What You Need To Know</h3>
                     <p>
                     <small>
-                        CoderFaire 2013<br/>
+                        PyTN 2014<br/>
                         <a href="http://www.flickr.com/photos/nasamarshall/5095567894/in/photostream/">Photo: NASA</a>
                     </small>
                     </p>
@@ -57,6 +57,7 @@
                     </p><p>
                         <a href="http://twitter.com/byeliad">@byeliad</a>
                     </p>
+                    <aside class="notes">A little about me, get this out of the way quickly.</aside>
                 </section>
 
                 <section>
@@ -68,6 +69,7 @@
                         <li>Rough Benchmarks</li>
                         <li>Redshift Architecture</li>
                     </ul>
+                    <aside class="notes">I always like to tell you what I'm going to tell you first.</aside>
                 </section>
 
                 <section>
@@ -102,12 +104,14 @@
                     <h3>Why we use it</h3>
                     <ul>
                         <li>It looks a lot like PostgreSQL</li>
-                        <!-- learning curve is short for us -->
                         <li>Much cheaper than analytic appliances (Vertica et al)</li>
-                        <!-- see the airbnb write-up -->
-                        <li>Easy ad-hoc aggregate queries</li>
-                        <!-- uses columnar store so sums, averages, etc are quick. -->
+                        <li>Easy and fast ad-hoc aggregate queries</li>
                     </ul>
+                    <aside class="notes">
+                        The learning curve was short for us to get started.
+                        Vertica was fairly expensive, longer learning curve. See the AirBNB writeup.
+                        Since it uses columnar storage, sums, avgs, counts are quite fast.
+                    </aside>
                 </section>
                 <section>
                     <h3>If this is Postgres:</h3>
@@ -126,20 +130,13 @@
                     <h3>What's it Cost?</h3>
                 </section>
 
-                <section>
-                    <ul>
-                        <li>XL = 0.85/hr</li>
-                        <li>8XL = 8 x 0.85/hr = $6.80/hr</li>
-                    </ul>
+                <section style="font-size: 80%;">
+                    <table><colgroup><col style="width: 16%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"><col style="width: 14%"></colgroup><caption>US East (N. Virginia)</caption><thead><tr><th></th><th class="rate">vCPU</th><th class="rate">ECU</th><th class="rate">Memory (GiB)</th><th class="rate">Storage</th><th class="rate">I/O</th><th class="rate">Price</th></tr></thead><tbody class="body"><tr class="heading"><th colspan="7" class="type">DW1 - Dense Storage</th></tr><tr class="tiers"><td class="size">dw1.xlarge</td><td class="vCPU">2</td><td class="ECU">4.4</td><td class="memory">15</td><td class="storage">2TB HDD</td><td class="io">0.30GB/s</td><td class="rate yrTerm1Hourly">$0.850 per Hour</td></tr><tr class="tiers"><td class="size">dw1.8xlarge</td><td class="vCPU">16</td><td class="ECU">35</td><td class="memory">120</td><td class="storage">16TB HDD</td><td class="io">2.40GB/s</td><td class="rate yrTerm1Hourly">$6.800 per Hour</td></tr></tbody><tbody class="body"><tr class="heading"><th colspan="7" class="type">DW2 - Dense Compute</th></tr><tr class="tiers"><td class="size">dw2.large</td><td class="vCPU">2</td><td class="ECU">7</td><td class="memory">15</td><td class="storage">0.16TB SSD</td><td class="io">0.20GB/s</td><td class="rate yrTerm1Hourly">$0.250 per Hour</td></tr><tr class="tiers"><td class="size">dw2.8xlarge</td><td class="vCPU">32</td><td class="ECU">104</td><td class="memory">244</td><td class="storage">2.56TB SSD</td><td class="io">3.70GB/s</td><td class="rate yrTerm1Hourly">$4.800 per Hour</td></tr></tbody></table>
                 </section>
 
-                <section>
+                <section style="font-size: 80%;">
                     <h3>Per Terabyte</h3>
-                    <ul>
-                        <li>Unreserved: $3,723 per TB per Year </li>
-                        <li>Reserved 1 year: $2,190 per TB per Year</li>
-                        <li>Reserved 3 years: $999 per TB per year</li>
-                     </ul>
+                    <table width="100%"><caption>US East (N. Virginia)</caption><thead><tr><th></th><th colspan="3" class="yrTerm">Effective Price per TB per Year</th></tr><tr><th></th><th class="type">On-Demand</th><th class="type">1yr RI</th><th class="type">3yr RI</th></tr></thead><tbody class="body"><tr class="tiers"><td class="tier">dw1.xlarge</td><td class="price OD">$3,723 </td><td class="price 1yRI">$2,192 </td><td class="price 3yRI">$999 </td></tr><tr class="tiers"><td class="tier">dw1.8xlarge</td><td class="price OD">$3,723 </td><td class="price 1yRI">$2,192 </td><td class="price 3yRI">$999 </td></tr><tr class="tiers"><td class="tier">dw2.large</td><td class="price OD">$13,688 </td><td class="price 1yRI">$8,794 </td><td class="price 3yRI">$5,498 </td></tr><tr class="tiers"><td class="tier">dw2.8xlarge</td><td class="price OD">$16,425 </td><td class="price 1yRI">$11,018 </td><td class="price 3yRI">$5,498 </td></tr></tbody></table>
                 </section>
 
                 <section>
@@ -241,10 +238,12 @@ Time: 5887.693 ms
                 </section>
 
                 <section>
-                    <h3>Two types of nodes...</h3>
+                    <h3>Types of nodes...</h3>
                     <ol>
                         <li>XL: 2 cores, 15GiB memory, 3 disk drives with 2TB of local attached storage.</li>
                         <li>8XL: 16 cores, 120GiB memory, 24 disk drives (16TB)</li>
+                        <li><b>(New)</b> SSD XL:  - 160 GB of SSD storage, 2 Intel Xeon E5-2670v2 virtual cores, and 15 GiB of RAM.</li>
+                        <li><b>(New)</b> SSD 8XL:  - 2.56 TB of SSD storage, 32 Intel Xeon E5-2670v2 virtual cores, and 244 GiB of RAM.</li>
                     </ol>
                 </section>
 
@@ -273,7 +272,6 @@ Time: 5887.693 ms
                         <li>Arrays</li>
                         <li>INTERVAL, TIME, TIMESTAMP WITH TIMEZONE</li>
                         <li>SERIAL, MONEY</li>
-                        <li>JSON</li>
                         <li>XML</li>
                         <li>UUID</li>
                         <li><a href="http://docs.aws.amazon.com/redshift/latest/dg/c_unsupported-postgresql-datatypes.html">...and more...</a></li>
@@ -293,6 +291,7 @@ Time: 5887.693 ms
                         <li>VARCHAR</li>
                         <li>DATE</li>
                         <li>TIMESTAMP</li>
+                        <li><b>(New)</b> JSON</li>
                     </ul>
                 </section>
                 <section>
