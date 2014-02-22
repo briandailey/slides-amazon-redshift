@@ -493,6 +493,7 @@
                         You can gzip your files before uploading to save
                         bandwidth. You can also separate your file into chunks
                         and Redshift will load them in parallel.
+                    </aside>
                 </section>
 
                 <section>
@@ -520,6 +521,16 @@ FROM 's3://objectpath'
                         have chunked files, you can load in parallel. COPY has
                         several other options, too. You can load it gzipped, or
                         load an encrypted file.
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>Loading via Remote Host</h3>
+                    <p>Connect to instances via SSH, executes commands, and loads generated text output.</p> 
+                    <aside class="notes">
+                        Uses the clusters public key to connect. Create a JSON
+                        manifest file on S3 that tells Redshift what commands
+                        to run.
                     </aside>
                 </section>
 
